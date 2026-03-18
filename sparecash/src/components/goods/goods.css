@@ -30,13 +30,30 @@ tr:hover {
     text-align: center;
 }
 
-#items_table td:last-child:hover {
+#items_table tr:not(:last-child) td:last-child:hover {
     background-color: red;
     color: #f0f0f0;
 }
+
+/* #items_table tr th:nth-last-child(2), td:nth-last-child(2) {
+    text-align: right;
+} */
 
 th {
     text-align: left;
     background-color: #008db4;
     color: #f0f0f0;
+}
+
+#items_table tr:last-child {
+    background-color: #39616c;
+    color: #f0f0f0;
+}
+
+#items_table tr:last-child td {
+    border: 1px solid #39616c;
+}
+
+#items_table tr:first-child th {
+    border: 1px solid #008db4;
 }

@@ -23,21 +23,19 @@ function Goods() {
     localStorage.setItem("goods", JSON.stringify(goods));
   }, [goods]);
 
-  // const [types, setTypes] = useState(() => {
-  //   const savedTypes = localStorage.getItem("types");
-  //   if (savedTypes !== null) {
-  //     const parsed = JSON.parse(savedTypes);
-  //     return Array.isArray(parsed) ? parsed : [];
-  //   }
-  //   return [];
-  // });
-
-  // useEffect(() => {
-  //   localStorage.setItem("types", JSON.stringify(types))
-  // }, [types]);
-
   const [types] = useState(["Nicotine", "Alcohol", "Soda", "Candy"]);
   const [selectedType, setSelectedType] = useState("");
+
+  const [currencies] = useState(["NOK", "USD", "EUR", "GBP"]);
+
+  const [selectedCurrency, setSelectedCurrency] = useState(() => {
+    const savedCurrencySelection = localStorage.getItem("selectedCurrency");
+    return savedCurrencySelection ?? "";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("selectedCurrency", selectedCurrency);
+  }, [selectedCurrency]);
 
   function addItem() {
     const nameInput = document.getElementById("name_input");
@@ -67,11 +65,23 @@ function Goods() {
     setGoods(goods.filter((_, i) => i !== index));
   }
 
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  function sumItems(goods){
+    let sum = 0;
+    goods.map((items) => {
+      sum += items.price;
+    });
+    return sum;
+  }
+
   return (
     <div id="goods_container">
-      <h2>Consumer Goods</h2>
+      <h2>Consumer Goods Overview</h2>
       {/* <p>Add consumer goods:</p> */}
-      <input type="text" placeholder="Name" id="name_input" />
+      <input type="text" placeholder="Item name" id="name_input" />
       <select
         value={selectedType}
         onChange={(e) => setSelectedType(e.target.value)}
@@ -80,10 +90,25 @@ function Goods() {
           Select type
         </option>
         {types.map((type, index) => (
-          <option key={index} value={type}>{type}</option>
+          <option key={index} value={type}>
+            {type}
+          </option>
         ))}
       </select>
-      <input type="number" placeholder="Price" id="price_input" />
+      <input type="number" placeholder="Weekly cost" id="price_input" />
+      <select
+        value={selectedCurrency}
+        onChange={(e) => setSelectedCurrency(e.target.value)}
+      >
+        <option value="" defaultValue hidden>
+          Select currency
+        </option>
+        {currencies.map((type, index) => (
+          <option key={index} value={type}>
+            {type}
+          </option>
+        ))}
+      </select>
       <button
         onClick={() => {
           addItem();
@@ -104,15 +129,25 @@ function Goods() {
           </tr>
           {goods.map((item, index) => (
             <tr key={index}>
-              <td>{item.name}</td>
+              <td>{capitalizeFirstLetter(item.name)}</td>
               <td>{item.type}</td>
-              <td>{item.price}</td>
+              <td>
+                {item.price} {selectedCurrency ? selectedCurrency : ""}
+              </td>
               <td onClick={() => removeItem(index)}>X</td>
             </tr>
           ))}
+          <tr>
+            <td>Overall weekly cost</td>
+            <td></td>
+            <td>
+              {sumItems(goods)} {selectedCurrency ? selectedCurrency : ""}
+            </td>
+            <td></td>
+          </tr>
         </tbody>
       </table>
-      <p>You have {goods.length} items</p>
+      <p>You have {goods.length} items.</p>
     </div>
   );
 }
