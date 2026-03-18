@@ -1,0 +1,42 @@
+#goods_container {
+    margin: 0 auto;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+}
+
+#items_table {
+    margin: 0 auto;
+    width: 100%;
+    text-align: left;
+    border: 1px solid black;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+#items_table th:last-child,
+#items_table td:last-child {
+    width: max-content;
+    align-items: center;
+    text-align: center;
+}
+
+#items_table td:last-child:hover {
+    background-color: red;
+    color: #f0f0f0;
+}
+
+th {
+    text-align: left;
+    background-color: #008db4;
+    color: #f0f0f0;
+}
