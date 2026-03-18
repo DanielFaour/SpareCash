@@ -35,6 +35,11 @@ tr:hover {
     color: #f0f0f0;
 }
 
+#items_table tr:not(:last-child) td:last-child {
+    background-color: rgb(255, 66, 66);
+    color: #f0f0f0;
+}
+
 /* #items_table tr th:nth-last-child(2), td:nth-last-child(2) {
     text-align: right;
 } */
