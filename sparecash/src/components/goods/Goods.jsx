@@ -136,38 +136,40 @@ function Goods() {
         </div>
       </div>
       {/* Goods Table */}
-      <table id="items_table">
-        <tbody>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Price</th>
-            <th></th>
-          </tr>
-          {goods.map((item, index) => (
-            <tr key={index}>
-              <td>{capitalizeFirstLetter(item.name)}</td>
-              <td>{item.type}</td>
-              <td>
-                {item.price} {selectedCurrency ? selectedCurrency : ""}
-              </td>
-              <td>
-                <button onClick={() => removeItem(index)}>
-                  <span id="delete_icon"></span>
-                </button>
-              </td>
+      <div id="tableContainer">
+        <table id="items_table">
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Price</th>
+              <th></th>
             </tr>
-          ))}
-          <tr>
-            <td>Overall weekly cost:</td>
-            <td></td>
-            <td>
-              {sumItems(goods)} {selectedCurrency ? selectedCurrency : ""}
-            </td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+            {goods.map((item, index) => (
+              <tr key={index}>
+                <td>{capitalizeFirstLetter(item.name)}</td>
+                <td>{item.type}</td>
+                <td>
+                  {item.price} {selectedCurrency ? selectedCurrency : ""}
+                </td>
+                <td>
+                  <button onClick={() => removeItem(index)}>
+                    <span id="delete_icon"></span>
+                  </button>
+                </td>
+              </tr>
+            ))}
+            <tr>
+              <td>Overall weekly cost:</td>
+              <td></td>
+              <td>
+                {sumItems(goods)} {selectedCurrency ? selectedCurrency : ""}
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <p>You have {goods.length} items.</p>
     </div>
   );

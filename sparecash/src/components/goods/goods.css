@@ -12,13 +12,18 @@ h2 {
 
 #items_table {
     margin: 0 auto;
-    width: 100%;
+    min-width: 100%;
+    width: auto;
     text-align: left;
     border-collapse: collapse;
     table-layout: fixed;
     border-radius: 4px;
     overflow: hidden;
     background-color: white;
+}
+
+#tableContainer {
+    overflow-x: auto;
 }
 
 td,
@@ -100,6 +105,8 @@ th {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 5px;
+    row-gap: 5px;
+    margin: 8px 0;
     width: 100%;
 }
 
@@ -111,7 +118,7 @@ th {
     flex-grow: 1;
     background-color: white;
     padding: 8px;
-    margin: 8px 0;
+
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -149,20 +156,26 @@ select {
     max-width: 60px;
 }
 
-#currency_input option {
-    text-align: center;
-}
-
 #currencyContainer {
     display: flex;
     gap: 5px;
-    justify-content: flex-end;
+    align-items: center;
 }
 
-#price_input, #type_input, button.goods_input {
-    max-width: 100px;
+#currencyContainer p {
+    margin: 0;
 }
+
+#type_input, #price_input {
+    min-width: 120px;
+   max-width: 200px;
+}
+
+button.goods_input {
+    max-width: 100px;
+ }
 
 #name_input{
-    max-width: 150px;
+   min-width: 100px;
+   max-width: 200px;
 }
