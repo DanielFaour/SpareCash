@@ -28,18 +28,28 @@ h2 {
 
 td,
 th {
-    border: 1px solid #ddd;
     padding: 5px;
 }
 
+tr {
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-last-child(2) {
+    border-bottom: none;
+}
+
+tr:first-child {
+    border-bottom: none;
+}
+
 tr:hover {
-    background-color: #ddd;
+    background-color: rgb(214, 242, 255);
 }
 
 #items_table td:last-child,
 #items_table th:last-child {
-    width: max-content;
-    min-width: 30px;
+    width: 40px;
     text-align: center;
     white-space: nowrap;
 }
@@ -142,7 +152,7 @@ button.goods_input:hover {
 }
 
 .goods_input:hover {
-    background-color: #eaeaea;
+    background-color: rgb(224, 240, 246);
 }
 
 select {
