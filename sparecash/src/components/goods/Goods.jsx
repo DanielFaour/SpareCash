@@ -43,7 +43,7 @@ function Goods() {
     const name = nameInput.value.trim();
     const type = selectedType;
     const price = parseFloat(priceInput.value);
-    if (name === "" || type === "" || isNaN(price)) {
+    if (name === "" || type === "" || isNaN(price) || price < 0) {
       alert("Please fill in all fields with valid values.");
       return;
     }
@@ -69,7 +69,7 @@ function Goods() {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  function sumItems(goods){
+  function sumItems(goods) {
     let sum = 0;
     goods.map((items) => {
       sum += items.price;
@@ -81,43 +81,60 @@ function Goods() {
     <div id="goods_container">
       <h2>Consumer Goods Overview</h2>
       {/* <p>Add consumer goods:</p> */}
-      <input type="text" placeholder="Item name" id="name_input" />
-      <select
-        value={selectedType}
-        onChange={(e) => setSelectedType(e.target.value)}
-      >
-        <option value="" defaultValue hidden>
-          Select type
-        </option>
-        {types.map((type, index) => (
-          <option key={index} value={type}>
-            {type}
+      <div id="goodsInputContainer">
+        <input
+          type="text"
+          placeholder="Item name"
+          id="name_input"
+          className="goods_input"
+        />
+        <select
+          value={selectedType}
+          onChange={(e) => setSelectedType(e.target.value)}
+          className="goods_input"
+        >
+          <option value="" defaultValue hidden>
+            Select type
           </option>
-        ))}
-      </select>
-      <input type="number" placeholder="Weekly cost" id="price_input" />
-      <select
-        value={selectedCurrency}
-        onChange={(e) => setSelectedCurrency(e.target.value)}
-      >
-        <option value="" defaultValue hidden>
-          Select currency
-        </option>
-        {currencies.map((type, index) => (
-          <option key={index} value={type}>
-            {type}
-          </option>
-        ))}
-      </select>
-      <button
-        onClick={() => {
-          addItem();
-        }}
-      >
-        Add Item
-      </button>
-      <br></br>
-      <br></br>
+          {types.map((type, index) => (
+            <option key={index} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
+        <input
+          type="number"
+          placeholder="Weekly cost"
+          id="price_input"
+          className="goods_input"
+        />
+        <button
+          onClick={() => {
+            addItem();
+          }}
+          className="goods_input"
+        >
+          Add Item
+        </button>
+        <div id="currencyContainer">
+          <p>Select currency:</p>
+          <select
+            value={selectedCurrency}
+            onChange={(e) => setSelectedCurrency(e.target.value)}
+            className="goods_input"
+            id="currency_input"
+          >
+            <option value="" defaultValue hidden>
+              Select currency
+            </option>
+            {currencies.map((type, index) => (
+              <option key={index} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
       {/* Goods Table */}
       <table id="items_table">
         <tbody>
@@ -125,7 +142,7 @@ function Goods() {
             <th>Name</th>
             <th>Type</th>
             <th>Price</th>
-            <th>Action</th>
+            <th></th>
           </tr>
           {goods.map((item, index) => (
             <tr key={index}>
@@ -134,11 +151,15 @@ function Goods() {
               <td>
                 {item.price} {selectedCurrency ? selectedCurrency : ""}
               </td>
-              <td onClick={() => removeItem(index)}>X</td>
+              <td>
+                <button onClick={() => removeItem(index)}>
+                  <span id="delete_icon"></span>
+                </button>
+              </td>
             </tr>
           ))}
           <tr>
-            <td>Overall weekly cost</td>
+            <td>Overall weekly cost:</td>
             <td></td>
             <td>
               {sumItems(goods)} {selectedCurrency ? selectedCurrency : ""}

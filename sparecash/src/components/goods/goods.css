@@ -3,40 +3,72 @@
     width: 100%;
     align-items: center;
     align-content: center;
+    max-width: 800px;
+}
+
+h2 {
+    margin: 0;
 }
 
 #items_table {
     margin: 0 auto;
     width: 100%;
     text-align: left;
-    border: 1px solid black;
     border-collapse: collapse;
     table-layout: fixed;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: white;
 }
 
-td, th {
+td,
+th {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 5px;
 }
 
 tr:hover {
     background-color: #ddd;
 }
 
-#items_table th:last-child,
-#items_table td:last-child {
+#items_table td:last-child,
+#items_table th:last-child {
     width: max-content;
-    align-items: center;
+    min-width: 30px;
     text-align: center;
+    white-space: nowrap;
 }
 
-#items_table tr:not(:last-child) td:last-child:hover {
-    background-color: red;
-    color: #f0f0f0;
+#items_table td:last-child {
+    padding: 2px;
 }
 
-#items_table tr:not(:last-child) td:last-child {
+#items_table button {
     background-color: rgb(255, 66, 66);
+    border: none;
+    padding: 5px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    color: #f0f0f0;
+    border-radius: 25%;
+}
+
+#delete_icon {
+    display: block;
+    width: 14px;
+    height: 14px;
+    background-image: url("../../assets/trash-bin.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    filter: invert(1);
+}
+
+
+#items_table button:hover {
+    background-color: rgb(255, 29, 29);
     color: #f0f0f0;
 }
 
@@ -47,18 +79,90 @@ tr:hover {
 th {
     text-align: left;
     background-color: #008db4;
-    color: #f0f0f0;
+    color: white;
 }
 
 #items_table tr:last-child {
     background-color: #39616c;
-    color: #f0f0f0;
+    color: white;
 }
 
 #items_table tr:last-child td {
-    border: 1px solid #39616c;
+    border: none;
 }
 
 #items_table tr:first-child th {
-    border: 1px solid #008db4;
+    border: none;
+}
+
+#goodsInputContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 100%;
+}
+
+#goodsInputContainer p {
+    gap: 30px;
+}
+
+.goods_input {
+    flex-grow: 1;
+    background-color: white;
+    padding: 8px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+select.goods_input {
+    cursor: pointer;
+}
+
+button.goods_input {
+    color: white;
+    cursor: pointer;
+    background-color: #008db4;
+}
+
+button.goods_input:hover {
+    background-color: #007393;
+}
+
+.goods_input:hover {
+    background-color: #eaeaea;
+}
+
+select {
+    cursor: pointer;
+    width: max-content;
+}
+
+#currency_input {
+    width: 60px;
+    min-width: 60px;
+    max-width: 60px;
+}
+
+#currency_input option {
+    text-align: center;
+}
+
+#currencyContainer {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
+}
+
+#price_input, #type_input, button.goods_input {
+    max-width: 100px;
+}
+
+#name_input{
+    max-width: 150px;
 }
