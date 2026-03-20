@@ -37,6 +37,8 @@ function Goods() {
     localStorage.setItem("selectedCurrency", selectedCurrency);
   }, [selectedCurrency]);
 
+  const [nameSortState, setNameSortState] = useState("");
+
   function addItem() {
     const nameInput = document.getElementById("name_input");
     const priceInput = document.getElementById("price_input");
@@ -50,6 +52,33 @@ function Goods() {
     const newItem = new GoodsItem(name, type, price);
     setGoods([...goods, newItem]);
     clearInputs();
+  }
+
+  function sortGoods(sortValue) {
+    let sorted = null;
+
+    switch (sortValue) {
+      case "nSort":
+        if (nameSortState === "asc") {
+          sorted = [...goods].sort((a, b) => b.name.localeCompare(a.name));
+          setNameSortState("desc");
+          sortButton();
+        } else {
+          sorted = [...goods].sort((a, b) => a.name.localeCompare(b.name));
+          setNameSortState("asc");
+          sortButton();
+        }
+    }
+    setGoods(sorted);
+  }
+
+  function sortButton() {
+    const sortButton = document.getElementById("sortNameButton")
+    if (nameSortState === "asc") {
+      sortButton.innerText = "▴";
+    } else {
+      sortButton.innerText = "▾";
+    }
   }
 
   function clearInputs() {
@@ -135,41 +164,44 @@ function Goods() {
           </select>
         </div>
       </div>
-      {/* Goods Table */}
-      <div id="tableContainer">
-        <table id="items_table">
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Price</th>
-              <th></th>
-            </tr>
-            {goods.map((item, index) => (
-              <tr key={index}>
-                <td>{capitalizeFirstLetter(item.name)}</td>
-                <td>{item.type}</td>
-                <td>
-                  {item.price} {selectedCurrency ? selectedCurrency : ""}
-                </td>
-                <td>
-                  <button onClick={() => removeItem(index)}>
-                    <span id="delete_icon"></span>
-                  </button>
-                </td>
-              </tr>
-            ))}
-            <tr>
-              <td>Overall weekly cost:</td>
-              <td></td>
+      {/* Goods Table ▴▾ */}
+      <table id="items_table">
+        <tbody>
+          <tr>
+            <th>
+              Name{" "}
+              <button id="sortNameButton" className="sortButton" onClick={() => sortGoods("nSort")}>
+                ▾
+              </button>
+            </th>
+            <th>Type</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+          {goods.map((item, index) => (
+            <tr key={index}>
+              <td>{capitalizeFirstLetter(item.name)}</td>
+              <td>{item.type}</td>
               <td>
-                {sumItems(goods)} {selectedCurrency ? selectedCurrency : ""}
+                {item.price} {selectedCurrency ? selectedCurrency : ""}
               </td>
-              <td></td>
+              <td>
+                <button id="deleteButton" onClick={() => removeItem(index)}>
+                  <span id="delete_icon"></span>
+                </button>
+              </td>
             </tr>
-          </tbody>
-        </table>
-      </div>
+          ))}
+          <tr>
+            <td>Overall weekly cost:</td>
+            <td></td>
+            <td>
+              {sumItems(goods)} {selectedCurrency ? selectedCurrency : ""}
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
       <p>You have {goods.length} items.</p>
     </div>
   );

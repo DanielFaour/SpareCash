@@ -1,9 +1,15 @@
 #goods_container {
+    box-sizing: border-box;
     margin: 0 auto;
     width: 100%;
     align-items: center;
     align-content: center;
     max-width: 800px;
+    padding: 25px;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #dbdbdb;
+    overflow: hidden;
 }
 
 h2 {
@@ -49,16 +55,14 @@ tr:hover {
 
 #items_table td:last-child,
 #items_table th:last-child {
-    width: 40px;
-    text-align: center;
-    white-space: nowrap;
+    text-align: right;
 }
 
 #items_table td:last-child {
     padding: 2px;
 }
 
-#items_table button {
+#items_table #deleteButton {
     background-color: rgb(255, 66, 66);
     border: none;
     padding: 5px;
@@ -68,6 +72,7 @@ tr:hover {
     cursor: pointer;
     color: #f0f0f0;
     border-radius: 25%;
+    margin-right: 5px;
 }
 
 #delete_icon {
@@ -82,7 +87,7 @@ tr:hover {
 }
 
 
-#items_table button:hover {
+#items_table #deleteButton:hover {
     background-color: rgb(255, 29, 29);
     color: #f0f0f0;
 }
