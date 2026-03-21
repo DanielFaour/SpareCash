@@ -35,6 +35,7 @@ h2 {
 td,
 th {
     padding: 5px;
+    
 }
 
 tr {
@@ -193,4 +194,17 @@ button.goods_input {
 #name_input{
    min-width: 100px;
    max-width: 200px;
+}
+
+span.sortButton {
+    color: rgb(255, 255, 255);
+    font-size: 10px;
+    display: inline-flex;
+    margin: 0;
+    height: 12px;
+    width: 12px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
 }

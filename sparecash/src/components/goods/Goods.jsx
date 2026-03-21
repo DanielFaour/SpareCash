@@ -8,7 +8,7 @@ class GoodsItem {
     this.price = price;
   }
 }
-
+// Goods
 function Goods() {
   const [goods, setGoods] = useState(() => {
     const savedGoods = localStorage.getItem("goods");
@@ -23,9 +23,11 @@ function Goods() {
     localStorage.setItem("goods", JSON.stringify(goods));
   }, [goods]);
 
+  // Types
   const [types] = useState(["Nicotine", "Alcohol", "Soda", "Candy"]);
   const [selectedType, setSelectedType] = useState("");
 
+  // Currencies
   const [currencies] = useState(["NOK", "USD", "EUR", "GBP"]);
 
   const [selectedCurrency, setSelectedCurrency] = useState(() => {
@@ -37,8 +39,7 @@ function Goods() {
     localStorage.setItem("selectedCurrency", selectedCurrency);
   }, [selectedCurrency]);
 
-  const [nameSortState, setNameSortState] = useState("");
-
+  // Goods handling
   function addItem() {
     const nameInput = document.getElementById("name_input");
     const priceInput = document.getElementById("price_input");
@@ -53,6 +54,45 @@ function Goods() {
     setGoods([...goods, newItem]);
     clearInputs();
   }
+
+  function removeItem(index) {
+    setGoods(goods.filter((_, i) => i !== index));
+  }
+
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  function sumItems(goods) {
+    let sum = 0;
+    goods.map((items) => {
+      sum += items.price;
+    });
+    return sum;
+  }
+
+  // input clearing
+  function clearInputs() {
+    const nameInput = document.getElementById("name_input");
+    const priceInput = document.getElementById("price_input");
+
+    nameInput.value = "";
+    setSelectedType("");
+    priceInput.value = "";
+  }
+
+  // Sorting
+  const [nameSortState, setNameSortState] = useState(() => {
+    const savedNameState = localStorage.getItem("nameSortState");
+    if (savedNameState !== null) {
+      return savedNameState ?? "";
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("nameSortState", JSON.stringify(nameSortState));
+  }, [nameSortState]);
 
   function sortGoods(sortValue) {
     let sorted = null;
@@ -73,37 +113,12 @@ function Goods() {
   }
 
   function sortButton() {
-    const sortButton = document.getElementById("sortNameButton")
+    const sortButton = document.getElementById("sortNameButton");
     if (nameSortState === "asc") {
-      sortButton.innerText = "▴";
+      sortButton.innerText = "▲";
     } else {
-      sortButton.innerText = "▾";
+      sortButton.innerText = "▼";
     }
-  }
-
-  function clearInputs() {
-    const nameInput = document.getElementById("name_input");
-    const priceInput = document.getElementById("price_input");
-
-    nameInput.value = "";
-    setSelectedType("");
-    priceInput.value = "";
-  }
-
-  function removeItem(index) {
-    setGoods(goods.filter((_, i) => i !== index));
-  }
-
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
-  function sumItems(goods) {
-    let sum = 0;
-    goods.map((items) => {
-      sum += items.price;
-    });
-    return sum;
   }
 
   return (
@@ -170,9 +185,13 @@ function Goods() {
           <tr>
             <th>
               Name{" "}
-              <button id="sortNameButton" className="sortButton" onClick={() => sortGoods("nSort")}>
-                ▾
-              </button>
+              <span
+                id="sortNameButton"
+                className="sortButton"
+                onClick={() => sortGoods("nSort")}
+              >
+                ◆ 
+              </span>
             </th>
             <th>Type</th>
             <th>Price</th>
