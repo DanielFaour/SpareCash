@@ -179,7 +179,6 @@ function Goods() {
           </select>
         </div>
       </div>
-      {/* Goods Table ▴▾ */}
       <table id="items_table">
         <tbody>
           <tr>
