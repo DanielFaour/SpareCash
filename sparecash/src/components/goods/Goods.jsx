@@ -169,7 +169,7 @@ function Goods() {
             id="currency_input"
           >
             <option value="" defaultValue hidden>
-              Select currency
+             
             </option>
             {currencies.map((type, index) => (
               <option key={index} value={type}>
