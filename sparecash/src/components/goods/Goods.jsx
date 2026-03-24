@@ -45,8 +45,9 @@ function Goods() {
     const priceInput = document.getElementById("price_input");
     const name = nameInput.value.trim();
     const type = selectedType;
+    const currency = selectedCurrency;
     const price = parseFloat(priceInput.value);
-    if (name === "" || type === "" || isNaN(price) || price < 0) {
+    if (name === "" || type === "" || isNaN(price) || price < 0 || currency === "") {
       alert("Please fill in all fields with valid values.");
       return;
     }
