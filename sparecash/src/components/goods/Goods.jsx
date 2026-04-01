@@ -9,35 +9,11 @@ class GoodsItem {
   }
 }
 // Goods
-function Goods() {
-  const [goods, setGoods] = useState(() => {
-    const savedGoods = localStorage.getItem("goods");
-    if (savedGoods !== null) {
-      const parsed = JSON.parse(savedGoods);
-      return Array.isArray(parsed) ? parsed : [];
-    }
-    return [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem("goods", JSON.stringify(goods));
-  }, [goods]);
+function Goods({ goods, setGoods, selectedCurrency, setSelectedCurrency, currencies }) {
 
   // Types
   const [types] = useState(["Nicotine", "Alcohol", "Soda", "Candy"]);
   const [selectedType, setSelectedType] = useState("");
-
-  // Currencies
-  const [currencies] = useState(["NOK", "USD", "EUR", "GBP"]);
-
-  const [selectedCurrency, setSelectedCurrency] = useState(() => {
-    const savedCurrencySelection = localStorage.getItem("selectedCurrency");
-    return savedCurrencySelection ?? "";
-  });
-
-  useEffect(() => {
-    localStorage.setItem("selectedCurrency", selectedCurrency);
-  }, [selectedCurrency]);
 
   // Goods handling
   function addItem() {
@@ -84,15 +60,12 @@ function Goods() {
 
   // Sorting
   const [nameSortState, setNameSortState] = useState(() => {
-    const savedNameState = localStorage.getItem("nameSortState");
-    if (savedNameState !== null) {
-      return savedNameState ?? "";
-    }
-    return [];
+  const savedNameState = localStorage.getItem("nameSortState");
+  return savedNameState !== null ? savedNameState : "asc";
   });
 
   useEffect(() => {
-    localStorage.setItem("nameSortState", JSON.stringify(nameSortState));
+  localStorage.setItem("nameSortState", nameSortState);
   }, [nameSortState]);
 
   function sortGoods(sortValue) {
