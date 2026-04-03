@@ -29,6 +29,16 @@ function App() {
     localStorage.setItem("selectedCurrency", selectedCurrency);
   }, [selectedCurrency]);
 
+  // Savings input
+  const [salary, setSalary] = useState(() => {
+    const savedSalary = localStorage.getItem("salary");
+    return savedSalary ?? "";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("salary", salary);
+  }, [salary]);
+
   return (
     <>
       <div id="main_container">
@@ -37,7 +47,7 @@ function App() {
           <h4>Track your repeated spendings.</h4>
         </div>
         <div id="data_container">
-          <Analytics goods={goods} />
+          <Analytics goods={goods} salary={salary} setSalary={setSalary} />
           <Goods goods={goods} setGoods={setGoods} selectedCurrency={selectedCurrency} setSelectedCurrency={setSelectedCurrency} currencies={currencies} />
         </div>
       </div>

@@ -78,17 +78,16 @@ const SavingsChart = ({ goods }) => {
 
 
   return (
-    <div>
       <div id="SavingsChartChart">
         <Chart
           options={state.options}
           series={state.series}
-          type="line"
-          width="1000"
-          height={"500px"}
+          type="bar"
+          width="300%"
+          height={"400px"}
+          redrawOnParentResize= {true}
         />
       </div>
-    </div>
   );
 };
 

@@ -50,3 +50,21 @@
 .apexcharts-svg {
   outline: none;
 }
+
+.apexchartsbasic-bar {
+
+}
+
+.salary_input {
+    flex-grow: 1;
+    background-color: white;
+    padding: 8px;
+
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: hidden;
+    overflow-x: auto;
+    font-size: 20px;
+}
